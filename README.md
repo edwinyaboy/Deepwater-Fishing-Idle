@@ -7,6 +7,18 @@
 <p><strong>A pixel-art idle fishing game about catching fish, building your collection, and seeing how deep you can go.</strong></p>
 
 <p>
+  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest">
+    <img src="https://img.shields.io/github/v/release/edwinyaboy/Deepwater-Fishing-Idle?display_name=tag&sort=semver" alt="Latest Release" />
+  </a>
+  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle">
+    <img src="https://img.shields.io/github/repo-size/edwinyaboy/Deepwater-Fishing-Idle" alt="Repository Size" />
+  </a>
+  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/commits/main">
+    <img src="https://img.shields.io/github/last-commit/edwinyaboy/Deepwater-Fishing-Idle" alt="Last Commit" />
+  </a>
+</p>
+
+<p>
   <a href="https://edwinyaboy.github.io/Deepwater-Fishing-Idle/">Play Now</a> ·
   <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest">Download</a> ·
   <a href="#get-started">Get started</a> ·
@@ -68,11 +80,34 @@ Deepwater tracks offline time and calculates your missed fishing progress when y
 
 Deepwater runs directly in a modern web browser.
 
-Download the latest release from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest), or clone the repository to run the browser version locally.
+The easiest way to play is through the [live browser version](https://edwinyaboy.github.io/Deepwater-Fishing-Idle/).
+
+You can also download the latest Windows or Android release from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
 
 ### Run from source
 
-Clone the repository and open `index.html` in a modern browser.
+The browser version does not require a frontend framework, bundler, or build step. It does need to be served through a local HTTP server rather than opened directly with `file://`.
+
+Clone the repository:
+
+```text
+git clone https://github.com/edwinyaboy/Deepwater-Fishing-Idle.git
+cd Deepwater-Fishing-Idle
+```
+
+If Python is installed, start a local server with:
+
+```text
+python -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+The relevant browser game files are:
 
 ```text
 Deepwater-Fishing-Idle/
@@ -81,8 +116,6 @@ Deepwater-Fishing-Idle/
 ├── css/
 └── assets/
 ```
-
-There is no frontend framework or build step required for the browser version.
 
 ## Android
 
@@ -94,17 +127,23 @@ Download the latest APK from [Releases](https://github.com/edwinyaboy/Deepwater-
 
 The Windows release packages the complete game into a single executable.
 
-Requires Windows 10/11 (64-bit), .NET 9 Desktop Runtime, and Microsoft Edge WebView2 Runtime.
+Requires:
+
+* Windows 10/11 (64-bit)
+* .NET 9 Desktop Runtime
+* Microsoft Edge WebView2 Runtime
+
+Download the latest Windows build from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
 
 ## Releases
 
-| Platform | Download       |
-| :------- | :------------- |
-| Browser  | Source package |
-| Android  | APK            |
-| Windows  | AIO `.EXE`     |
+| Platform | Download                                                            |
+| :------- | :------------------------------------------------------------------ |
+| Browser  | [Play online](https://edwinyaboy.github.io/Deepwater-Fishing-Idle/) |
+| Android  | APK                                                                 |
+| Windows  | AIO `.EXE`                                                          |
 
-The latest builds and source packages are available on the [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases) page.
+The latest builds and release assets are available on the [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases) page.
 
 ## Save Data
 
