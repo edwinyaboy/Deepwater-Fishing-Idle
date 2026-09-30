@@ -10,9 +10,6 @@
   <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest">
     <img src="https://img.shields.io/github/v/release/edwinyaboy/Deepwater-Fishing-Idle?display_name=tag&sort=semver" alt="Latest Release" />
   </a>
-  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle">
-    <img src="https://img.shields.io/github/repo-size/edwinyaboy/Deepwater-Fishing-Idle" alt="Repository Size" />
-  </a>
   <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/commits/main">
     <img src="https://img.shields.io/github/last-commit/edwinyaboy/Deepwater-Fishing-Idle" alt="Last Commit" />
   </a>
@@ -20,7 +17,7 @@
 
 <p>
   <a href="https://edwinyaboy.github.io/Deepwater-Fishing-Idle/">Play Now</a> ·
-  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest">Download</a> ·
+  <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases">Download</a> ·
   <a href="#get-started">Get started</a> ·
   <a href="#features">Features</a> ·
   <a href="#releases">Releases</a> ·
@@ -82,7 +79,7 @@ Deepwater runs directly in a modern web browser.
 
 The easiest way to play is through the [live browser version](https://edwinyaboy.github.io/Deepwater-Fishing-Idle/).
 
-You can also download the latest Windows or Android release from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
+You can also download the latest Windows or Android release from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases).
 
 ### Run from source
 
@@ -121,7 +118,7 @@ Deepwater-Fishing-Idle/
 
 Deepwater is also available as a native Android build packaged with Capacitor.
 
-Download the latest APK from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
+Download the latest APK from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/tag/v1.0_Mobile).
 
 ## Windows
 
@@ -133,7 +130,7 @@ Requires:
 * .NET 9 Desktop Runtime
 * Microsoft Edge WebView2 Runtime
 
-Download the latest Windows build from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
+Download the latest Windows build from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/tag/v1.0_Desktop).
 
 ## Releases
 
@@ -178,12 +175,6 @@ Deepwater is built with a deliberately lightweight web stack.
 | Capacitor     | Android packaging              |
 
 The browser version does not require a framework, bundler, or external backend.
-
-## Development
-
-The public repository contains the playable game source.
-
-Development tools, test infrastructure, Android build configuration, release signing material, and other internal development files are kept outside the public game source.
 
 ## Credits
 
