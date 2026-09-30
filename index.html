@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Deepwater: Fishing Idle</title>
+  <link rel="icon" type="image/png" href="assets/icons/fish-favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/fontawesome-subset.min.css" integrity="sha384-cj2hq/bNUoI2CTMetcxGEWCiLpUJTTzD/81FtdxFiNvqlRb41HfRzizkJEO6H63i">
+  <script src="assets/vendor/canvas-confetti/confetti.browser.min.js" integrity="sha384-JSZXO0kKYHTylAsDYTb+7Kg2eUyalm19b8Pydcdf8sQ1cCKYZr9lLahoKT9+LFY5" defer></script>
+  <script src="assets/vendor/gsap/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" defer></script>
+  <link rel="modulepreload" href="js/script.js">
+  <link rel="modulepreload" href="js/fishes.js">
+  <link rel="modulepreload" href="js/xpLogic.js">
+  <link rel="modulepreload" href="js/skillTree.js">
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+    <div class="loading-content">
+      <h1 class="loading-title">Deepwater: Fishing Idle</h1>
+      <div class="loading-bar-track">
+        <div id="loading-bar-fill" class="loading-bar-fill"></div>
+      </div>
+      <div id="loading-percent" class="loading-percent">0%</div>
+      <div class="loading-hint">Casting lines and loading the cove…</div>
+    </div>
+  </div>
+  <div class="bg-layer" aria-hidden="true">
+    <video class="bg-video" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback poster="assets/background/background.png">
+      <source src="assets/background/m2-res_1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+  <header id="stats-bar" class="stats-bar" aria-label="Player stats">
+    <div class="stat-chip stat-chip-xp">
+      <span>Level <span id="xp-level">1</span> · <span id="xp-progress-text">0 / 100</span> XP</span>
+      <div id="xp-progress-container">
+        <div id="xp-progress"></div>
+      </div>
+    </div>
+    <div class="stat-chip">
+      <img src="assets/icons/currency/coin.png" alt="" class="counter-icon" /><span id="coin-count">0</span><span class="sr-only"> coins</span>
+    </div>
+    <div class="stat-chip">
+      <img src="assets/icons/currency/pearl.png" alt="" class="counter-icon" /><span id="gem-count">0</span><span class="sr-only"> pearls</span>
+    </div>
+    <div id="lifetime-fish-container" class="stat-chip">
+      <img src="assets/fish/harbor_bass.png" alt="" class="counter-icon" /><span id="lifetime-fish-count">0</span><span class="sr-only"> fish caught</span>
+    </div>
+    <div id="luck-container" class="stat-chip stat-chip-luck">
+      Luck: <span id="luck-percentage">0</span>%
+    </div>
+    <div id="reel-speed-container" class="stat-chip stat-chip-speed">
+      Rod Tier: <span id="reel-speed-level">I</span>
+    </div>
+  </header>
+  <nav id="icon-rail" class="icon-rail" aria-label="Main navigation">
+    <button class="tab-btn rail-btn active" data-tab="fishing" aria-current="page" title="Fishing"><i class="rail-icon" aria-hidden="true"></i><span>Fishing</span><span class="rail-short" aria-hidden="true">FISH</span></button>
+    <button class="tab-btn rail-btn" data-tab="inventory" title="Inventory"><i class="rail-icon" aria-hidden="true"></i><span>Inventory</span><span class="rail-short" aria-hidden="true">INV</span></button>
+    <button class="tab-btn rail-btn" data-tab="index" title="Index"><i class="rail-icon" aria-hidden="true"></i><span>Index</span><span class="rail-short" aria-hidden="true">IND</span></button>
+    <button class="tab-btn rail-btn" data-tab="upgrade" title="Upgrades"><i class="rail-icon" aria-hidden="true"></i><span>Upgrades</span><span class="rail-short" aria-hidden="true">UPGR</span></button>
+    <button class="tab-btn rail-btn" data-tab="locations" title="Locations"><i class="rail-icon" aria-hidden="true"></i><span>Locations</span><span class="rail-short" aria-hidden="true">LOC</span></button>
+    <button class="tab-btn rail-btn" data-tab="skilltree" title="Skill Tree"><i class="rail-icon" aria-hidden="true"></i><span>Skills</span><span class="rail-short" aria-hidden="true">SP</span></button>
+    <button class="tab-btn rail-btn" data-tab="potions" title="Potions"><i class="rail-icon" aria-hidden="true"></i><span>Potions</span><span class="rail-short" aria-hidden="true">POTS</span></button>
+    <button class="tab-btn rail-btn" data-tab="crates" title="Chests"><i class="rail-icon" aria-hidden="true"></i><span>Chests</span><span class="rail-short" aria-hidden="true">CHST</span></button>
+    <button class="tab-btn rail-btn" data-tab="relics" title="Relics"><i class="rail-icon" aria-hidden="true"></i><span>Relics</span><span class="rail-short" aria-hidden="true">REL</span></button>
+    <button class="tab-btn rail-btn" data-tab="mastery" title="Achievements"><i class="rail-icon" aria-hidden="true"></i><span>Awards</span><span class="rail-short" aria-hidden="true">ACHV</span></button>
+    <button class="tab-btn rail-btn" data-tab="rebirth" title="Rebirth"><i class="rail-icon" aria-hidden="true"></i><span>Rebirth</span><span class="rail-short" aria-hidden="true">REBR</span></button>
+    <button id="settings-btn" class="rail-btn rail-settings-btn" title="Settings"><i class="rail-icon" aria-hidden="true"></i><span>Settings</span><span class="rail-short" aria-hidden="true">SET</span></button>
+  </nav>
+  <div class="rail-scroll-hint rail-scroll-hint-left" aria-hidden="true">&#8249;</div>
+  <div class="rail-scroll-hint rail-scroll-hint-right" aria-hidden="true">&#8250;</div>
+  <div id="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title" tabindex="-1">
+    <h2 id="settings-title">Settings</h2>
+    <button id="close-settings-btn" class="pixel-btn">Close</button>
+
+    <div class="settings-row">
+      <label for="ui-volume" class="settings-label">UI Sounds</label>
+      <input type="range" id="ui-volume" min="0" max="1" step="0.01" />
+    </div>
+<div class="settings-credits">
+  <i class="fa-solid fa-crown" aria-hidden="true"></i> Shrine - Main Developer<br>
+  <i class="fa-solid fa-heart" aria-hidden="true"></i> Drew - Beta Tester<br>
+  <i class="fa-solid fa-poo" aria-hidden="true"></i> MissZombae - Beta Tester
+</div>
+  </div>
+  <div id="tutorial-banner" role="status" aria-live="polite">
+    <div id="tutorial-banner-text"></div>
+    <button type="button" id="tutorial-next-btn" class="pixel-btn" hidden>Got it</button>
+  </div>
+  <!-- Sibling of <main>, not nested in it: <main>'s backdrop-filter creates a containing block that traps position:fixed descendants (same reason #settings-panel and #tutorial-banner live out here). -->
+  <section id="skilltree" class="tab-content" role="dialog" aria-modal="true" aria-label="Skill Tree" tabindex="-1">
+    <div id="skilltree-topbar">
+      <h2>Skill Tree</h2>
+      <button id="skilltree-close-btn" class="pixel-btn">Close <i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div id="skilltree-header"></div>
+    <div id="skilltree-map" tabindex="0" role="region" aria-label="Skill tree map"></div>
+    <div id="skilltree-tooltip" class="skilltree-tooltip" role="tooltip"></div>
+  </section>
+  <div id="skill-confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="skill-confirm-title" tabindex="-1">
+    <div class="offline-modal-box">
+      <h2 id="skill-confirm-title">Purchase Skill Upgrade?</h2>
+      <div id="skill-confirm-message" class="offline-modal-sub">
+        Are you sure you want to purchase <strong id="skill-confirm-target"></strong> for <strong id="skill-confirm-cost"></strong>?
+      </div>
+      <div class="skill-confirm-actions">
+        <button id="skill-confirm-cancel" class="pixel-btn" type="button">Cancel</button>
+        <button id="skill-confirm-purchase" class="pixel-btn" type="button">Purchase</button>
+      </div>
+    </div>
+  </div>
+  <main>
+    <h1 class="sr-only">Deepwater: Fishing Idle</h1>
+    <section id="fishing" class="tab-content active">
+      <h2>Deepwater: Fishing Idle</h2>
+      <div id="current-location-line"></div>
+      <div id="character-area">
+  <div id="fishing-scene">
+    <div class="water-shimmer" aria-hidden="true"></div>
+    <span class="bubble" aria-hidden="true" style="left:12%; width:6px; height:6px; animation-delay:0s; animation-duration:5.5s;"></span>
+    <span class="bubble" aria-hidden="true" style="left:24%; width:4px; height:4px; animation-delay:1.4s; animation-duration:4.2s;"></span>
+    <span class="bubble" aria-hidden="true" style="left:68%; width:5px; height:5px; animation-delay:2.6s; animation-duration:6s;"></span>
+    <span class="bubble" aria-hidden="true" style="left:80%; width:7px; height:7px; animation-delay:0.7s; animation-duration:5s;"></span>
+    <span class="bubble" aria-hidden="true" style="left:45%; width:3px; height:3px; animation-delay:3.5s; animation-duration:4.8s;"></span>
+  </div>
+  <div id="recent-fish-container"></div>
+  <div id="fishing-status" aria-live="polite">Waiting to catch fish...</div>
+  <div id="bag-capacity"></div>
+</div>
+    </section>
+    <section id="inventory" class="tab-content">
+      <h2>Inventory <span id="inventory-capacity"></span></h2>
+      <div id="inventory-sell-all"></div>
+      <div class="inventory-search">
+        <input type="text" id="fish-search" placeholder="Search fish..." aria-label="Search fish">
+        <button id="search-btn" class="pixel-btn">Search</button>
+        <button id="reset-filters-btn" class="pixel-btn">Reset</button>
+      </div>
+      <div class="inventory-filters">
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Common">
+          <span class="checkmark"></span>
+          <span>Common</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Rare">
+          <span class="checkmark"></span>
+          <span>Rare</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Epic">
+          <span class="checkmark"></span>
+          <span>Epic</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Heroic">
+          <span class="checkmark"></span>
+          <span>Heroic</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Legendary">
+          <span class="checkmark"></span>
+          <span>Legendary</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Mythical">
+          <span class="checkmark"></span>
+          <span>Mythical</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" class="rarity-filter" data-rarity="Secret">
+          <span class="checkmark"></span>
+          <span>Secret</span>
+        </label>
+        <label class="material-checkbox">
+          <input type="checkbox" id="shiny-filter">
+          <span class="checkmark"></span>
+          <span class="shiny-glow">Shiny</span>
+        </label>
+      </div>
+      <div id="inventory-list" tabindex="0" role="region" aria-label="Fish inventory" class="style-7">No items yet.</div>
+    </section>
+    <section id="upgrade" class="tab-content">
+      <h2>Upgrades</h2>
+      <div id="upgrade-list"></div>
+	</section>
+	<section id="rebirth" class="tab-content">
+      <h2>Rebirth</h2>
+      <div id="rebirth-content"></div>
+	</section>
+	<section id="index" class="tab-content">
+      <h2>Index</h2>
+      <div id="index-list">Catch a fish to update the fish index!</div>
+    </section>
+    <section id="locations" class="tab-content">
+      <h2>Locations</h2>
+      <div id="location-picker"></div>
+    </section>
+    <section id="relics" class="tab-content">
+      <h2>The Tideheart</h2>
+      <div id="relics-list"></div>
+    </section>
+    <section id="mastery" class="tab-content">
+      <h2>Achievements</h2>
+      <div id="mastery-list"></div>
+    </section>
+    <section id="crates" class="tab-content">
+      <h2>Chests</h2>
+      <div id="crates-list"></div>
+    </section>
+    <section id="potions" class="tab-content">
+      <h2>Potions</h2>
+      <div id="potions-list"></div>
+      <h2>Chum</h2>
+      <p class="system-blurb">
+        Unlike potions, chum's luck boost is spent per catch, not per minute - buy a batch before a grinding session and it lasts exactly as long as you're actively fishing.
+      </p>
+      <div id="chum-list"></div>
+    </section>
+  </main>
+  <script type="module" src="js/script.js"></script>
+  <audio id="close-sound" src="assets/sounds/close.mp3"></audio>
+  <audio id="tick-sound" src="assets/sounds/tick.mp3"></audio>
+</body>
+</html>
