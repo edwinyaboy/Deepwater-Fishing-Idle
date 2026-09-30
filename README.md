@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/icons/screenshot.png" alt="Deepwater: Fishing Idle" width="96" />
+<img src="assets/icons/screenshot.png" alt="Deepwater: Fishing Idle" width="192" />
 
 <h1>Deepwater: Fishing Idle</h1>
 
