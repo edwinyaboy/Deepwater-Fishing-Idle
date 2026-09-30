@@ -7,6 +7,7 @@
 <p><strong>A pixel-art idle fishing game about catching fish, building your collection, and seeing how deep you can go.</strong></p>
 
 <p>
+  <a href="https://edwinyaboy.github.io/Deepwater-Fishing-Idle/">Play Now</a> ·
   <a href="https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest">Download</a> ·
   <a href="#get-started">Get started</a> ·
   <a href="#features">Features</a> ·
