@@ -17,10 +17,6 @@
 
 </div>
 
-<p align="center">
-  <img src="docs/gameplay.gif" alt="Deepwater: Fishing Idle gameplay" width="900" />
-</p>
-
 ## Fish. Upgrade. Repeat.
 
 Deepwater combines the progression of an idle game with a hands-on fishing loop. Every cast gives you another chance at a better catch, while upgrades gradually push your fishing setup further.
@@ -72,7 +68,7 @@ Deepwater tracks offline time and calculates your missed fishing progress when y
 
 Deepwater runs directly in a modern web browser.
 
-Download the latest release from [Releases](../../releases/latest), or use the browser source package for a local copy.
+Download the latest release from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest), or clone the repository to run the browser version locally.
 
 ### Run from source
 
@@ -92,7 +88,13 @@ There is no frontend framework or build step required for the browser version.
 
 Deepwater is also available as a native Android build packaged with Capacitor.
 
-Download the latest APK from [Releases](../../releases/latest).
+Download the latest APK from [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases/latest).
+
+## Windows
+
+The Windows release packages the complete game into a single executable.
+
+Requires Windows 10/11 (64-bit), .NET 9 Desktop Runtime, and Microsoft Edge WebView2 Runtime.
 
 ## Releases
 
@@ -100,8 +102,9 @@ Download the latest APK from [Releases](../../releases/latest).
 | :------- | :------------- |
 | Browser  | Source package |
 | Android  | APK            |
+| Windows  | AIO `.EXE`     |
 
-The latest builds and source packages are available on the [Releases](../../releases) page.
+The latest builds and source packages are available on the [Releases](https://github.com/edwinyaboy/Deepwater-Fishing-Idle/releases) page.
 
 ## Save Data
 
